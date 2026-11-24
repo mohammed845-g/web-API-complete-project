@@ -1,0 +1,94 @@
+@web_API_project_HostAddress = http://localhost:5232
+
+### Seeded patients with paging
+GET {{web_API_project_HostAddress}}/api/patients?pageNumber=1&pageSize=10
+Accept: application/json
+
+### Search patients by name and filter by date of birth
+GET {{web_API_project_HostAddress}}/api/patients?search=Ahmed&dateOfBirthFrom=1980-01-01&dateOfBirthTo=2000-01-01&pageNumber=1&pageSize=5
+Accept: application/json
+
+### Get patient by ID
+GET {{web_API_project_HostAddress}}/api/patients/1
+Accept: application/json
+
+### Create patient
+POST {{web_API_project_HostAddress}}/api/patients
+Content-Type: application/json
+
+{
+  "name": "Ahmed Ali",
+  "dateOfBirth": "1990-01-15T00:00:00"
+}
+
+### Update patient
+PUT {{web_API_project_HostAddress}}/api/patients/1
+Content-Type: application/json
+
+{
+  "name": "Ahmed Ali Updated",
+  "dateOfBirth": "1990-01-15T00:00:00"
+}
+
+### Get doctors, search by name and filter by specialization
+GET {{web_API_project_HostAddress}}/api/doctors?search=Omar&specialization=Cardiology&pageNumber=1&pageSize=10
+Accept: application/json
+
+### Get doctor by ID
+GET {{web_API_project_HostAddress}}/api/doctors/1
+Accept: application/json
+
+### Create doctor
+POST {{web_API_project_HostAddress}}/api/doctors
+Content-Type: application/json
+
+{
+  "name": "Mona Hassan",
+  "specialization": "Cardiology"
+}
+
+### Update doctor
+PUT {{web_API_project_HostAddress}}/api/doctors/1
+Content-Type: application/json
+
+{
+  "name": "Omar Khaled",
+  "specialization": "Neurology"
+}
+
+### List appointments, filter by patient, doctor, and date range
+GET {{web_API_project_HostAddress}}/api/appointments?patientId=1&doctorId=1&dateFrom=2026-12-01&dateTo=2026-12-31&pageNumber=1&pageSize=10
+Accept: application/json
+
+### Get appointment by composite key (date is a query parameter)
+GET {{web_API_project_HostAddress}}/api/appointments/1/1?appointmentDate=2026-12-01T10:00:00
+Accept: application/json
+
+### Create appointment (patient and doctor IDs must exist)
+POST {{web_API_project_HostAddress}}/api/appointments
+Content-Type: application/json
+
+{
+  "patientId": 1,
+  "doctorId": 1,
+  "appointmentDate": "2026-12-05T10:30:00"
+}
+
+### Update appointment key/date
+PUT {{web_API_project_HostAddress}}/api/appointments/1/1?appointmentDate=2026-12-01T10:00:00
+Content-Type: application/json
+
+{
+  "patientId": 1,
+  "doctorId": 1,
+  "appointmentDate": "2026-12-01T11:00:00"
+}
+
+### Delete appointment
+DELETE {{web_API_project_HostAddress}}/api/appointments/1/1?appointmentDate=2026-12-01T10:00:00
+
+### Delete patient
+DELETE {{web_API_project_HostAddress}}/api/patients/1
+
+### Delete doctor
+DELETE {{web_API_project_HostAddress}}/api/doctors/1
